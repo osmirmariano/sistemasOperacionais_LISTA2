@@ -22,7 +22,7 @@ int main(int argc, char**argv){
         scanf("%lf", &pontos);
     }while(pontos <= 0);
 
-    #pragma omp parallel for''
+    #pragma omp parallel for
     for(i = 0; i < pontos; i++){
         quantidade += distancia(RAND(-raio, raio), RAND(-raio, raio)) < raio;    
     }
