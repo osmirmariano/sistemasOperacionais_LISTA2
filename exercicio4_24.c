@@ -8,7 +8,7 @@ void *threadPrimos(int numero){
     int divisor, verifica, limite;
 
     printf("\nPRIMOS: ");
-    for(x = 0; x < numero; x++){
+    for(x = 0; x <= numero; x++){
         if(x >= 1){//Verifica se o número é maior que 1
             divisor = 2;
             verifica = 1;
