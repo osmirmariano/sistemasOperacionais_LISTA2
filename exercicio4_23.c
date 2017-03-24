@@ -14,20 +14,21 @@ double distancia (double x, double y){
 
 int main(int argc, char**argv){
     double pi = 0, pontos, raio = 1.0;
-    int i, quantidade = 0, recebe;
+    int quantidade = 0, recebe;
+    int a, b;
     pthread_t tred;
-
+    
     do{
         printf("\nInforme a quantidade de pontos que deseja gerar: ");
         scanf("%lf", &pontos);
     }while(pontos <= 0);
-
-    #pragma omp parallel for
-    for(i = 0; i < pontos; i++){
-        quantidade += distancia(RAND(-raio, raio), RAND(-raio, raio)) < raio;    
+    
+    #pragma omp parallel
+    {        
+        for(a = 0; a < pontos; a++){
+            quantidade += distancia(RAND(-raio, raio), RAND(-raio, raio)) < raio;    
+        }
     }
-
-
     pi = ((4.0*quantidade)/pontos);
     printf("\nO valor do pi: %lf\n\n", pi);
 
