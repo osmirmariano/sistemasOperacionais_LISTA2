@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <math.h>
+int vetor[1000];
 
-void fibonacciCalculo(int valor){
+void *fibonacciCalculo(int valor){
     int anterior = 0, atual = 1;
     int resultado = 0;
     int i;
 
-    int vetor[valor];
+    //int vetor[valor];
     vetor[0] = 0;
     vetor[1] = 1;
 
@@ -18,26 +18,20 @@ void fibonacciCalculo(int valor){
         atual = resultado;
         vetor[i] = resultado;
     }
-    //return vetor;
-    // for(int x = 0; x < valor; x++){
-    //     printf("%d\n", vetor[x]);
-    // }
 }
 
 int main(){
-    int valor, recebe;
+    int valor, x;
     pthread_t tred;
 
     printf("INFORME NÚMERO DE ELEMENTOS FIBONACCI: ");
     scanf("%d", &valor);
-
-    recebe = pthread_create(&tred, NULL, fibonacciCalculo(valor), NULL);
-
-    if (recebe){
-         printf("ERROR; retornando o código para pthread_create() is %d\n", recebe);
-         exit(-1);
+    
+    pthread_create(&tred, NULL, fibonacciCalculo(valor), NULL);
+    wait();
+    for(x = 0; x < valor; x++){
+        printf("%d\n", vetor[x]);
     }
-    //pthread_join(tred, NULL);
+    
     return 0;
 }
-
